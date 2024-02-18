@@ -1,23 +1,22 @@
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import PropertyForm from '../NewProperty/components/PropertyForm';
-import useSWR from 'swr';
 import { useParams } from 'react-router-dom';
 import { RouterPaths } from '../../interfaces';
 import { Property } from '../NewProperty/schema';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import { useFetch } from '../../hooks/useFetch';
+import { PROPERTIES_URL } from '../../constants';
 
 const EditProperty: React.FC = () => {
   const { id } = useParams();
-  const { data } = useSWR<Property>(
-    id ? RouterPaths.EDIT_PROPERTY.replace(':id', id.toString()) : null,
-    { revalidateIfStale: false }
-  );
+  const { data: property } = useFetch<Property>({
+    url: `${PROPERTIES_URL}/${id}`,
+    revalidateIfStale: false,
+  });
 
-  console.log('data', data);
-
-  if (!data)
+  if (!property)
     return (
       <Alert
         severity='error'
@@ -31,7 +30,7 @@ const EditProperty: React.FC = () => {
   return (
     <>
       <Typography variant='h1'>Edit Listing</Typography>
-      <PropertyForm property={data} />
+      <PropertyForm property={property} />
     </>
   );
 };

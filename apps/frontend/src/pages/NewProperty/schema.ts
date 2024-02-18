@@ -5,7 +5,7 @@ export const propertySchema = z
   .object({
     title: z.string().min(1).max(155),
     type: z.nativeEnum(PropertyType).superRefine((value, ctx) => {
-      if (value === PropertyType.SELECT) {
+      if (value === PropertyType.Select) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: 'Please select a type',

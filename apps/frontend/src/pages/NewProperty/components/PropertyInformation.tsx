@@ -52,9 +52,6 @@ const PropertyInformation: React.FC = () => {
                   label='Type'
                   error={!!errors.type}
                 >
-                  <MenuItem key='' value=''>
-                    <em>Select type</em>
-                  </MenuItem>
                   {Object.keys(PropertyType).map((key) => (
                     <MenuItem
                       key={key}
@@ -73,6 +70,24 @@ const PropertyInformation: React.FC = () => {
             )}
           />
         </FormControl>
+      </Grid>
+      <Grid item xs={12}>
+        <Controller
+          name={'area'}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              required
+              fullWidth
+              variant='filled'
+              label={'Area'}
+              error={!!errors['area']?.message}
+              helperText={errors['area']?.message}
+              placeholder="Type in the property's area"
+            />
+          )}
+        />
       </Grid>
       <Grid item xs={12}>
         <Controller

@@ -4,34 +4,41 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { Property } from '../NewProperty/schema';
-import { PropertyType, RouterPaths } from '../../interfaces';
+import { RouterPaths } from '../../interfaces';
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 import { mutate } from 'swr';
-import { API_URL } from '../../constants';
+import { PROPERTIES_URL } from '../../constants';
 import { useNavigate } from 'react-router-dom';
+import { useFetch } from '../../hooks/useFetch';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const properties: Property[] = [
-    {
-      id: 1,
-      title: 'Cozy Cottage',
-      type: PropertyType.BUY,
-      area: 'Athens',
-      price: `${100} €`,
-      description: 'A cozy cottage in the woods.',
-    },
-  ];
+
+  const {
+    data: properties,
+    isValidating,
+    error,
+  } = useFetch<Property[]>({
+    url: PROPERTIES_URL,
+  });
 
   const prefetchProperty = (property: Property) => {
-    const path = RouterPaths.EDIT_PROPERTY.replace(
-      ':id',
-      property.id.toString()
-    );
-    console.log('path', `${API_URL}${path}`);
-    mutate(`${API_URL}${path}`, property);
+    mutate(`${PROPERTIES_URL}/${property.id}`, property);
   };
+
+  if (isValidating) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error</div>;
+  }
+
+  if (!properties) {
+    return null;
+  }
+
   return (
     <Grid container spacing={4}>
       {properties.map((property) => (

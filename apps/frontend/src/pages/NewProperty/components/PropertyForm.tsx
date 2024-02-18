@@ -6,11 +6,17 @@ import { PropertyData, propertySchema } from '../schema';
 import { prepareInitialValueData } from '../../../utils/formUtils';
 import SubmitForm from './SubmitForm';
 import PropertyInformation from './PropertyInformation';
+import usePropertiesServices from '../../../services/properties.services';
+import { useNavigate } from 'react-router-dom';
+import { RouterPaths } from '../../../interfaces';
+
 type Props = {
   property?: PropertyData;
 };
 
 const PropertyForm: React.FC<Props> = ({ property }) => {
+  const navigate = useNavigate();
+  const { handleAsyncSubmit, isValidating } = usePropertiesServices();
   const defaultValues = useMemo(
     () => prepareInitialValueData(property),
     [property]
@@ -25,8 +31,11 @@ const PropertyForm: React.FC<Props> = ({ property }) => {
     formMethods.reset(defaultValues);
   };
 
-  const handleFormSubmit = (dataValues: PropertyData) => {
-    console.log(dataValues);
+  const handleFormSubmit = async (dataValues: PropertyData) => {
+    const values = await handleAsyncSubmit(dataValues);
+    if (values) {
+      navigate(RouterPaths.HOME);
+    }
   };
 
   return (
@@ -38,10 +47,7 @@ const PropertyForm: React.FC<Props> = ({ property }) => {
       >
         <Grid spacing={2} container mt={2} item xs={12} md={6}>
           <PropertyInformation />
-          <SubmitForm
-            reset={handleResetForm}
-            isValidating={formMethods.formState.isSubmitting}
-          />
+          <SubmitForm reset={handleResetForm} isValidating={isValidating} />
         </Grid>
       </form>
     </FormProvider>

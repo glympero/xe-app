@@ -1,5 +1,4 @@
 import useSWR, { KeyedMutator } from 'swr';
-import { API_URL } from '../constants';
 
 export interface IReturnedData<T> {
   data?: T;
@@ -14,7 +13,7 @@ export type FetcherType = <T = unknown>(
 ) => Promise<T>;
 
 export const fetcher: FetcherType = async (url: string, init = {}) => {
-  const res = await fetch(`${API_URL}${url}`, {
+  const res = await fetch(url, {
     ...init,
   });
   if (!res.ok) {

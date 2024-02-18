@@ -1,7 +1,7 @@
 export enum PropertyType {
-  SELECT = 'Select type',
-  RENT = 'Rent',
-  BUY = 'Buy',
-  EXCHANGE = 'Exchange',
-  DONATION = 'Donation',
+  Select = 'Select type',
+  Rent = 'Rent',
+  Buy = 'Buy',
+  Exchange = 'Exchange',
+  Donation = 'Donation',
 }
