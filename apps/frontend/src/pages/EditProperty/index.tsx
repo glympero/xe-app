@@ -1,12 +1,12 @@
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import PropertyForm from '../components/PropertyForm';
+import PropertyForm from '../../components/Form/PropertyForm';
 import { useParams } from 'react-router-dom';
-import { Property, RouterPaths } from '@/App/interfaces';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-import { useFetch } from '@/App/hooks/useFetch';
-import { PROPERTIES_URL } from '@/App/constants';
+import { PROPERTIES_URL } from '../../constants';
+import { useFetch } from '../../hooks/useFetch';
+import { Property, RouterPaths } from '../../interfaces';
 
 const EditProperty: React.FC = () => {
   const { id } = useParams();

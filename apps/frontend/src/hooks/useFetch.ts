@@ -21,6 +21,10 @@ export type FetcherType = <T = unknown>(
 export const fetcher: FetcherType = async (url: string, init = {}) => {
   const res = await fetch(url, {
     ...init,
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
   });
   if (!res.ok) {
     const error = await res.json();

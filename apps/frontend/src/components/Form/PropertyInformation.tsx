@@ -4,9 +4,10 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import { Controller, useFormContext } from 'react-hook-form';
-import { PropertyData, PropertyType } from '@/App/interfaces';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
+import { PropertyData, PropertyType } from '../../interfaces';
+import Area from './Area';
 
 const PropertyInformation: React.FC = () => {
   const {
@@ -60,7 +61,7 @@ const PropertyInformation: React.FC = () => {
                 </Select>
                 {errors?.type && (
                   <FormHelperText color='error'>
-                    {errors.type.message}
+                    {errors.type.message as string}
                   </FormHelperText>
                 )}
               </>
@@ -68,24 +69,7 @@ const PropertyInformation: React.FC = () => {
           />
         </FormControl>
       </Grid>
-      <Grid item xs={12}>
-        <Controller
-          name={'area'}
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              required
-              fullWidth
-              variant='filled'
-              label={'Area'}
-              error={!!errors['area']?.message}
-              helperText={errors['area']?.message}
-              placeholder="Type in the property's area"
-            />
-          )}
-        />
-      </Grid>
+      <Area />
       <Grid item xs={12}>
         <Controller
           name={'price'}

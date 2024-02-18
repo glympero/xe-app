@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ky from 'ky';
-import { PROPERTIES_URL } from '@/App/constants';
-import { PropertyData } from '@/App/interfaces';
+import { PROPERTIES_URL } from '../constants';
+import { PropertyData } from '../interfaces';
 
 const usePropertiesServices = () => {
   const [isValidating, setIsValidating] = useState(false);
@@ -36,7 +36,7 @@ const usePropertiesServices = () => {
 
       return res;
     } catch (error) {
-      console.error('Error:', error);
+      return error;
     } finally {
       setIsValidating(false);
     }

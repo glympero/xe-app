@@ -1,11 +1,12 @@
 import Grid from '@mui/material/Grid';
-import { PROPERTIES_URL } from '@/App/constants';
-import { useFetch } from '@/App/hooks/useFetch';
 import NoProperties from './components/NoProperties';
 import PropertyDetails from './components/PropertyDetails';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-import { Property } from '@/App/interfaces';
+import { PROPERTIES_URL } from '../../constants';
+import { useFetch } from '../../hooks/useFetch';
+import { Property } from '../../interfaces';
+import { Box, CircularProgress } from '@mui/material';
 
 const Home: React.FC = () => {
   const {
@@ -18,7 +19,11 @@ const Home: React.FC = () => {
   });
 
   if (isValidating) {
-    return <div>Loading...</div>;
+    return (
+      <Box display={'flex'} justifyContent={'center'}>
+        <CircularProgress color='inherit' size={30} />
+      </Box>
+    );
   }
 
   if (error) {

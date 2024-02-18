@@ -1,6 +1,6 @@
 import React from 'react';
 import { SWRConfiguration, SWRConfig } from 'swr';
-import { fetcher } from '@/App/hooks/useFetch';
+import { fetcher } from '../hooks/useFetch';
 
 export interface SWRProviderProps {
   swrConfig?: SWRConfiguration;

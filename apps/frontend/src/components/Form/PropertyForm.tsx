@@ -2,13 +2,13 @@ import Grid from '@mui/material/Grid';
 import React, { useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { propertySchema } from '@/App/schemas/property';
-import { prepareInitialValueData } from '@/App/utils';
 import SubmitForm from './SubmitForm';
 import PropertyInformation from './PropertyInformation';
-import usePropertiesServices from '@/App/hooks/usePropertiesServices';
 import { useNavigate } from 'react-router-dom';
-import { Property, PropertyData, RouterPaths } from '@/App/interfaces';
+import usePropertiesServices from '../../hooks/usePropertiesServices';
+import { Property, PropertyData, RouterPaths } from '../../interfaces';
+import { propertySchema } from '../../schemas/property';
+import { prepareInitialValueData } from '../../utils';
 
 type Props = {
   property?: Property;

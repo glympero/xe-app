@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { propertySchema } from '@/App/schemas/property';
+import { propertySchema } from '../schemas/property';
 
 export enum PropertyType {
   Select = 'Select type',
@@ -8,6 +8,12 @@ export enum PropertyType {
   Exchange = 'Exchange',
   Donation = 'Donation',
 }
+
+export type AutocompleteData = {
+  placeId: string;
+  mainText: string;
+  secondaryText: string;
+};
 
 export type PropertyData = z.infer<typeof propertySchema>;
 export type Property = PropertyData & { id: number };

@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import PropertyForm from '../components/PropertyForm';
+import PropertyForm from '../../components/Form/PropertyForm';
 
 const NewProperty: React.FC = () => {
   return (

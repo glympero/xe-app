@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import Layout from './components/Layout';
+import Layout from './components/Layout/Layout';
 import { RouterPaths } from './interfaces';
 const NewProperty = lazy(() => import('./pages/NewProperty'));
 const EditProperty = lazy(() => import('./pages/EditProperty'));

@@ -7,8 +7,8 @@ import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 import { mutate } from 'swr';
 import { useNavigate } from 'react-router-dom';
-import { PROPERTIES_URL } from '@/App/constants';
-import { Property, RouterPaths } from '@/App/interfaces';
+import { PROPERTIES_URL } from '../../../constants';
+import { Property, RouterPaths } from '../../../interfaces';
 
 type Props = {
   property: Property;

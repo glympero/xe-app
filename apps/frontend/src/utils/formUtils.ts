@@ -1,4 +1,4 @@
-import { PropertyData, PropertyType } from '@/App/interfaces';
+import { PropertyData, PropertyType } from '../interfaces';
 
 export const prepareInitialValueData = (property?: PropertyData) => {
   return {

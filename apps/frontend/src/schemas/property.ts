@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { PropertyType } from '@/App/interfaces';
+import { PropertyType } from '../interfaces';
 
 export const propertySchema = z
   .object({
