@@ -3,7 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Layout from './components/Layout';
 import { RouterPaths } from './interfaces';
-const Form = lazy(() => import('./pages/Form'));
+const NewProperty = lazy(() => import('./pages/NewProperty'));
+const EditProperty = lazy(() => import('./pages/EditProperty'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const Router: React.FC = () => {
@@ -15,7 +16,15 @@ const Router: React.FC = () => {
           path={RouterPaths.NEW_PROPERTY}
           element={
             <Suspense>
-              <Form />
+              <NewProperty />
+            </Suspense>
+          }
+        />
+        <Route
+          path={RouterPaths.EDIT_PROPERTY}
+          element={
+            <Suspense>
+              <EditProperty />
             </Suspense>
           }
         />

@@ -1,5 +1,5 @@
 import { PropertyType } from '../interfaces';
-import { PropertyData } from '../pages/Form/schema';
+import { PropertyData } from '../pages/NewProperty/schema';
 
 export const prepareInitialValueData = (property?: PropertyData) => {
   return {

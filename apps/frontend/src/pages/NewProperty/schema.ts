@@ -29,3 +29,4 @@ export const propertySchema = z
   .required();
 
 export type PropertyData = z.infer<typeof propertySchema>;
+export type Property = PropertyData & { id: number };
