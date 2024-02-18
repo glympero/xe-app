@@ -1,8 +1,14 @@
 import useSWR, { KeyedMutator } from 'swr';
 
+export type ApiError = {
+  message: string;
+  error: string;
+  statusCode: number;
+};
+
 export interface IReturnedData<T> {
   data?: T;
-  error?: unknown;
+  error?: ApiError;
   isValidating: boolean;
   mutate: KeyedMutator<T>;
 }
