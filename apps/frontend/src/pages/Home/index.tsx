@@ -11,6 +11,7 @@ import { mutate } from 'swr';
 import { PROPERTIES_URL } from '../../constants';
 import { useNavigate } from 'react-router-dom';
 import { useFetch } from '../../hooks/useFetch';
+import NoProperties from './components/NoProperties';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -35,8 +36,8 @@ const Home: React.FC = () => {
     return <div>Error</div>;
   }
 
-  if (!properties) {
-    return null;
+  if (!properties || properties.length === 0) {
+    return <NoProperties />;
   }
 
   return (
@@ -58,7 +59,7 @@ const Home: React.FC = () => {
                 {property.description}
               </Typography>
               <Typography variant='body2' color='text.secondary'>
-                {property.price}
+                {property.price} €
               </Typography>
             </CardContent>
             <CardActions>

@@ -6,7 +6,7 @@ export const prepareInitialValueData = (property?: PropertyData) => {
     title: property?.title ?? '',
     type: property?.type ?? PropertyType.Select,
     area: property?.area ?? '',
-    price: property?.price ?? '',
+    price: property?.price,
     description: property?.description ?? '',
   };
 };

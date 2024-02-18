@@ -15,8 +15,6 @@ const PropertyInformation: React.FC = () => {
     formState: { errors },
   } = useFormContext<PropertyData>();
 
-  console.log('errors', errors);
-
   return (
     <>
       <Grid item xs={12}>
@@ -98,6 +96,18 @@ const PropertyInformation: React.FC = () => {
               {...field}
               required
               fullWidth
+              type='number'
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === '') {
+                  field.onChange(value);
+                  return;
+                }
+                const numberValue = Number(value);
+                if (!isNaN(numberValue)) {
+                  field.onChange(numberValue);
+                }
+              }}
               variant='filled'
               label={'Price in Euros'}
               error={!!errors['price']?.message}

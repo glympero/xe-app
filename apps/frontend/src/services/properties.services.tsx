@@ -24,9 +24,28 @@ const usePropertiesServices = () => {
     }
   };
 
+  const handleAsyncEdit = async (data: PropertyData, id: number) => {
+    setIsValidating(true);
+    try {
+      const res = await ky.patch(`${PROPERTIES_URL}/${id}`, {
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      return res;
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setIsValidating(false);
+    }
+  };
+
   return {
     isValidating,
     handleAsyncSubmit,
+    handleAsyncEdit,
   };
 };
 export default usePropertiesServices;

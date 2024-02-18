@@ -14,7 +14,7 @@ export const propertySchema = z
       return true;
     }),
     area: z.string().min(1),
-    price: z.string().superRefine((value, ctx) => {
+    price: z.number().superRefine((value, ctx) => {
       const valueNumber = Number(value);
       if (isNaN(valueNumber) || valueNumber <= 0) {
         ctx.addIssue({
