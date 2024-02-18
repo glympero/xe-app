@@ -4,9 +4,8 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import { Controller, useFormContext } from 'react-hook-form';
-import { PropertyType } from '../../../interfaces';
+import { PropertyData, PropertyType } from '@/App/interfaces';
 import MenuItem from '@mui/material/MenuItem';
-import { PropertyData } from '../schema';
 import FormHelperText from '@mui/material/FormHelperText';
 
 const PropertyInformation: React.FC = () => {

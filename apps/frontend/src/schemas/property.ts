@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { PropertyType } from '../../interfaces';
+import { PropertyType } from '@/App/interfaces';
 
 export const propertySchema = z
   .object({
@@ -27,6 +27,3 @@ export const propertySchema = z
     description: z.string().optional(),
   })
   .required();
-
-export type PropertyData = z.infer<typeof propertySchema>;
-export type Property = PropertyData & { id: number };

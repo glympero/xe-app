@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { PropertyData } from '../pages/NewProperty/schema';
 import ky from 'ky';
-import { PROPERTIES_URL } from '../constants';
+import { PROPERTIES_URL } from '@/App/constants';
+import { PropertyData } from '@/App/interfaces';
 
 const usePropertiesServices = () => {
   const [isValidating, setIsValidating] = useState(false);

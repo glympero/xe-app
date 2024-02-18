@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { RouterPaths } from '../interfaces';
+import { RouterPaths } from '@/App/interfaces';
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const currentYear = new Date().getFullYear();

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RouterPaths } from '../../interfaces';
+import { RouterPaths } from '@/App/interfaces';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
