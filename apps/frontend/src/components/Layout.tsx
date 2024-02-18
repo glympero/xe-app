@@ -6,6 +6,7 @@ import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { RouterPaths } from '../interfaces';
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const currentYear = new Date().getFullYear();
@@ -16,11 +17,15 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
           <Typography variant='h6' style={{ flexGrow: 1 }}>
             XE Lympe Property App
           </Typography>
-          <Button color='inherit' component={Link} to='/'>
+          <Button color='inherit' component={Link} to={RouterPaths.HOME}>
             Home
           </Button>
-          <Button color='inherit' component={Link} to='/create-property'>
-            Add Property
+          <Button
+            color='inherit'
+            component={Link}
+            to={RouterPaths.NEW_PROPERTY}
+          >
+            New Property
           </Button>
         </Toolbar>
       </AppBar>

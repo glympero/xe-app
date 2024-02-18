@@ -1,10 +1,13 @@
+import Typography from '@mui/material/Typography';
 import React from 'react';
+import PropertyForm from './components/PropertyForm';
 
 const Form: React.FC = () => {
   return (
-    <div>
-      <h1>Add Listing Page</h1>
-    </div>
+    <>
+      <Typography variant='h1'>Add Listing Page</Typography>
+      <PropertyForm />
+    </>
   );
 };
 

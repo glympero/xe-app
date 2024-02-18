@@ -1,5 +1,5 @@
 export enum RouterPaths {
   HOME = '/',
-  CREATE_PROPERTY = '/create-property',
+  NEW_PROPERTY = '/new-property',
   EDIT_PROPERTY = '/edit-property/:id',
 }

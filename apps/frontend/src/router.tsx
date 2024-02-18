@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Layout from './components/Layout';
 import { RouterPaths } from './interfaces';
 const Form = lazy(() => import('./pages/Form'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const Router: React.FC = () => {
   return (
@@ -11,10 +12,18 @@ const Router: React.FC = () => {
       <Routes>
         <Route path={RouterPaths.HOME} element={<Home />} />
         <Route
-          path={RouterPaths.CREATE_PROPERTY}
+          path={RouterPaths.NEW_PROPERTY}
           element={
             <Suspense>
               <Form />
+            </Suspense>
+          }
+        />
+        <Route
+          path='*'
+          element={
+            <Suspense>
+              <NotFound />
             </Suspense>
           }
         />

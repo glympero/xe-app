@@ -12,7 +12,6 @@ const Home: React.FC = () => {
       imageUrl: 'https://via.placeholder.com/150',
       description: 'A cozy cottage in the woods.',
     },
-    // Add more properties as needed
   ];
   return (
     <Grid container spacing={4}>
