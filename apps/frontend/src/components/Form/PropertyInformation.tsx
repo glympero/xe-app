@@ -79,17 +79,17 @@ const PropertyInformation: React.FC = () => {
               {...field}
               required
               fullWidth
-              type='number'
               onChange={(e) => {
                 const value = e.target.value;
-                if (value === '') {
-                  field.onChange(value);
-                  return;
-                }
-                const numberValue = Number(value);
-                if (!isNaN(numberValue)) {
-                  field.onChange(numberValue);
-                }
+                field.onChange(value.replace(/[^0-9]/g, ''));
+              }}
+              inputProps={{
+                pattern: '\\d*',
+                onKeyDown: (e) => {
+                  if (['e', 'E', '+', '-', '.'].includes(e.key)) {
+                    e.preventDefault();
+                  }
+                },
               }}
               variant='filled'
               label={'Price in Euros'}
