@@ -107,6 +107,8 @@ const PropertyInformation: React.FC = () => {
           render={({ field }) => (
             <TextField
               {...field}
+              multiline
+              rows={3}
               fullWidth
               variant='filled'
               label={'Description'}

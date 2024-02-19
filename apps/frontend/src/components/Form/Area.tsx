@@ -1,4 +1,4 @@
-import { Controller, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { AutocompleteData, PropertyData } from '../../interfaces';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState } from 'react';
@@ -11,9 +11,9 @@ import Notifications from '../Errors/Notifications';
 
 const Area: React.FC = () => {
   const {
-    control,
     setValue,
     formState: { errors },
+    watch,
   } = useFormContext<PropertyData>();
   const [search, setSearch] = useState<string>('');
 
@@ -21,47 +21,51 @@ const Area: React.FC = () => {
 
   const { areas, isValidating, error } = useUserSearch(value);
 
+  const area = watch('area');
+
   return (
     <>
       <Grid item xs={12}>
-        <Controller
-          name='area'
-          control={control}
-          render={({ field }) => (
-            <Autocomplete
-              {...field}
-              freeSolo
-              options={
-                areas
-                  ? areas.map(
-                      (area: AutocompleteData) =>
-                        `${area.mainText} - ${area.secondaryText ?? 'N/A'}`
-                    )
-                  : []
-              }
-              onInputChange={(_, value) => setSearch(value)}
-              onChange={(_, data) => setValue('area', data ?? '')}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label='Area'
-                  variant='filled'
-                  placeholder="Type in the property's area"
-                  error={!!errors['area']?.message}
-                  helperText={errors['area']?.message}
-                  InputProps={{
-                    ...params.InputProps,
-                    endAdornment: (
-                      <>
-                        {isValidating ? (
-                          <CircularProgress color='inherit' size={20} />
-                        ) : null}
-                        {params.InputProps.endAdornment}
-                      </>
-                    ),
-                  }}
-                />
-              )}
+        <Autocomplete
+          freeSolo
+          options={areas ?? []}
+          value={area ?? null}
+          onInputChange={(_, value) => setSearch(value)}
+          getOptionLabel={(option) => {
+            if (typeof option === 'string') {
+              return option;
+            }
+            return option?.mainText
+              ? `${option.mainText} - ${option.secondaryText ?? 'N/A'}`
+              : '';
+          }}
+          onChange={(_, data) => {
+            const dataValue = data as AutocompleteData;
+            setValue('area', {
+              placeId: dataValue?.placeId ?? '',
+              mainText: dataValue?.mainText ?? '',
+              secondaryText: dataValue?.secondaryText ?? '',
+            });
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label='Area'
+              variant='filled'
+              placeholder="Type in the property's area"
+              error={!!errors['area']?.message}
+              helperText={errors['area']?.message}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {isValidating ? (
+                      <CircularProgress color='inherit' size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                ),
+              }}
             />
           )}
         />

@@ -41,7 +41,7 @@ const PropertyDetails: React.FC<Props> = ({ property }) => {
             </Typography>
           </Box>
           <Typography variant='body1' color='text.secondary'>
-            {property.area}
+            {`${property.area.mainText} - ${property.area.secondaryText ?? 'N/A'}`}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
             {property.description}

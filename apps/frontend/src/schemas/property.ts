@@ -1,5 +1,6 @@
 import * as z from 'zod';
 import { PropertyType } from '../interfaces';
+import { areaSchema } from './area';
 
 export const propertySchema = z
   .object({
@@ -13,7 +14,15 @@ export const propertySchema = z
       }
       return true;
     }),
-    area: z.string().min(1, 'Field is required'),
+    area: areaSchema.superRefine((value, ctx) => {
+      if (!value.placeId || !value.mainText) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Field is required',
+        });
+      }
+      return true;
+    }),
     price: z
       .string()
       .min(1, 'Field is required')

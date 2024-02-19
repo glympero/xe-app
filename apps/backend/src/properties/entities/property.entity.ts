@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Area } from './area.entity';
 
 @Entity()
 export class Property {
@@ -8,8 +15,9 @@ export class Property {
   title: string;
   @Column()
   type: string;
-  @Column()
-  area: string;
+  @JoinColumn()
+  @ManyToOne(() => Area, (area) => area.properties, { cascade: true })
+  area: Area;
   @Column()
   price: number;
   @Column()
