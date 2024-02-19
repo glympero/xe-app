@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { AutocompleteData, PropertyData } from '../../interfaces';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { useDebounce } from 'use-debounce';
