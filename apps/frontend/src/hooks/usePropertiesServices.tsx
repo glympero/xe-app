@@ -4,7 +4,7 @@ import { PROPERTIES_URL } from '../constants';
 import { PropertyData } from '../interfaces';
 import { ApiError } from './useFetch';
 
-const usePropertiesServices = () => {
+export const usePropertiesServices = () => {
   const [isValidating, setIsValidating] = useState(false);
 
   const handleAsyncSubmit = async (data: PropertyData) => {
@@ -59,4 +59,3 @@ const usePropertiesServices = () => {
     handleAsyncEdit,
   };
 };
-export default usePropertiesServices;

@@ -11,7 +11,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <SWRProvider
-          value={{ provider: () => new Map() }}
           swrConfig={{
             revalidateOnFocus: false,
             shouldRetryOnError: false,

@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import SubmitForm from './SubmitForm';
 import PropertyInformation from './PropertyInformation';
 import { useNavigate } from 'react-router-dom';
-import usePropertiesServices from '../../hooks/usePropertiesServices';
+import { usePropertiesServices } from '../../hooks/usePropertiesServices';
 import { Property, PropertyData, RouterPaths } from '../../interfaces';
 import { propertySchema } from '../../schemas/property';
 import { prepareInitialValueData } from '../../utils';

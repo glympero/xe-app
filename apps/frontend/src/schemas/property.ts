@@ -4,12 +4,12 @@ import { areaSchema } from './area';
 
 export const propertySchema = z
   .object({
-    title: z.string().min(1, 'Field is required').max(155),
+    title: z.string().min(1, 'Title is required').max(155),
     type: z.nativeEnum(PropertyType).superRefine((value, ctx) => {
       if (value === PropertyType.Select) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Field is required',
+          message: 'Type is required',
         });
       }
       return true;
@@ -18,14 +18,14 @@ export const propertySchema = z
       if (!value.placeId || !value.mainText) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Field is required',
+          message: 'Area is required',
         });
       }
       return true;
     }),
     price: z
       .string()
-      .min(1, 'Field is required')
+      .min(1, 'Price is required')
       .superRefine((value, ctx) => {
         const valueNumber = Number(value);
         if (isNaN(valueNumber) || valueNumber <= 0) {
