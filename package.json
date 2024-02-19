@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"cd apps/frontend && npm run dev\" \"cd apps/backend && npm run dev\""
+    "dev": "concurrently \"cd apps/frontend && npm run dev\" \"cd apps/backend && npm run dev\"",
+    "test": "concurrently \"cd apps/frontend && npm run test\" \"cd apps/backend && npm run test\""
   },
   "keywords": [],
   "author": "",

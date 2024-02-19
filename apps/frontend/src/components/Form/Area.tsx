@@ -31,7 +31,6 @@ const Area: React.FC = () => {
           options={areas ?? []}
           value={area.placeId ? area : ''}
           onInputChange={(_, value) => {
-            console.log('value', value);
             setSearch(value);
           }}
           getOptionLabel={(option) => {
