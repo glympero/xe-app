@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { AutocompleteData, PropertyData } from '../../interfaces';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { useDebounce } from 'use-debounce';
@@ -29,8 +29,11 @@ const Area: React.FC = () => {
         <Autocomplete
           freeSolo
           options={areas ?? []}
-          value={area ?? null}
-          onInputChange={(_, value) => setSearch(value)}
+          value={area.placeId ? area : ''}
+          onInputChange={(_, value) => {
+            console.log('value', value);
+            setSearch(value);
+          }}
           getOptionLabel={(option) => {
             if (typeof option === 'string') {
               return option;
