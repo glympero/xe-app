@@ -10,7 +10,7 @@ import { Property, PropertyData, RouterPaths } from '../../interfaces';
 import { propertySchema } from '../../schemas/property';
 import { prepareInitialValueData } from '../../utils';
 import { ApiError } from '../../hooks/useFetch';
-import Notifications from '../Layout/Notifications';
+import Notifications from '../Errors/Notifications';
 
 type Props = {
   property?: Property;

@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import { useDebounce } from 'use-debounce';
 import { useUserSearch } from '../../hooks/useAreaSearch';
 import CircularProgress from '@mui/material/CircularProgress';
-import Notifications from '../Layout/Notifications';
+import Notifications from '../Errors/Notifications';
 
 const Area: React.FC = () => {
   const {

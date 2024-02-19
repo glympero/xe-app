@@ -7,8 +7,3 @@ services:
       - '5433:5432'
     environment:
       POSTGRES_PASSWORD: pass123
-    volumes:
-      - db_data:/var/lib/postgresql/data
-
-volumes:
-  db_data:
