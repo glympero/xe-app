@@ -5,8 +5,9 @@ import Button from '@mui/material/Button';
 type Props = {
   reset: () => void;
   isValidating: boolean;
+  isEditMode: boolean;
 };
-const SubmitForm: React.FC<Props> = ({ reset, isValidating }) => {
+const SubmitForm: React.FC<Props> = ({ reset, isValidating, isEditMode }) => {
   return (
     <Grid item xs={12} display={'flex'} justifyContent={'start'} gap={1}>
       <Button
@@ -19,7 +20,7 @@ const SubmitForm: React.FC<Props> = ({ reset, isValidating }) => {
           ) : null
         }
       >
-        Save
+        {isEditMode ? 'Edit' : 'Submit'}
       </Button>
       <Button
         onClick={() => {
@@ -28,7 +29,7 @@ const SubmitForm: React.FC<Props> = ({ reset, isValidating }) => {
         disabled={isValidating}
         variant='outlined'
       >
-        Clear
+        {isEditMode ? 'Reset' : 'Clear'}
       </Button>
     </Grid>
   );

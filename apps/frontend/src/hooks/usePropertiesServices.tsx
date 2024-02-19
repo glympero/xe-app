@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ky from 'ky';
 import { PROPERTIES_URL } from '../constants';
 import { PropertyData } from '../interfaces';
+import { ApiError } from './useFetch';
 
 const usePropertiesServices = () => {
   const [isValidating, setIsValidating] = useState(false);
@@ -9,16 +10,21 @@ const usePropertiesServices = () => {
   const handleAsyncSubmit = async (data: PropertyData) => {
     setIsValidating(true);
     try {
-      const res = await ky.post(`${PROPERTIES_URL}`, {
+      await ky.post(`${PROPERTIES_URL}`, {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      return res;
+      return {
+        res: true,
+      };
     } catch (error) {
-      console.error('Error:', error);
+      return {
+        res: false,
+        error: error as ApiError,
+      };
     } finally {
       setIsValidating(false);
     }
@@ -27,16 +33,21 @@ const usePropertiesServices = () => {
   const handleAsyncEdit = async (data: PropertyData, id: number) => {
     setIsValidating(true);
     try {
-      const res = await ky.patch(`${PROPERTIES_URL}/${id}`, {
+      await ky.patch(`${PROPERTIES_URL}/${id}`, {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      return res;
+      return {
+        res: true,
+      };
     } catch (error) {
-      return error;
+      return {
+        res: false,
+        error: error as ApiError,
+      };
     } finally {
       setIsValidating(false);
     }

@@ -1,13 +1,13 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import { AutocompleteData, PropertyData } from '../../interfaces';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { useDebounce } from 'use-debounce';
 import { useUserSearch } from '../../hooks/useAreaSearch';
 import CircularProgress from '@mui/material/CircularProgress';
-import Snackbar from '@mui/material/Snackbar';
+import Notifications from '../Layout/Notifications';
 
 const Area: React.FC = () => {
   const {
@@ -19,56 +19,55 @@ const Area: React.FC = () => {
 
   const [value] = useDebounce(search, 1000);
 
-  const { areas, isValidating, isError } = useUserSearch(value);
+  const { areas, isValidating, error } = useUserSearch(value);
 
-  useEffect(() => {
-    if (isError) {
-      <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={isError}
-        message='Error fetching data'
-      />;
-    }
-  }, [isError]);
   return (
-    <Grid item xs={12}>
-      <Controller
-        name='area'
-        control={control}
-        render={({ field }) => (
-          <Autocomplete
-            {...field}
-            freeSolo
-            options={
-              areas ? areas.map((user: AutocompleteData) => user.mainText) : []
-            }
-            onInputChange={(_, value) => setSearch(value)}
-            onChange={(_, data) => setValue('area', data ?? '')}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label='Area'
-                variant='filled'
-                placeholder="Type in the property's area"
-                error={!!errors['area']?.message}
-                helperText={errors['area']?.message}
-                InputProps={{
-                  ...params.InputProps,
-                  endAdornment: (
-                    <>
-                      {isValidating ? (
-                        <CircularProgress color='inherit' size={20} />
-                      ) : null}
-                      {params.InputProps.endAdornment}
-                    </>
-                  ),
-                }}
-              />
-            )}
-          />
-        )}
-      />
-    </Grid>
+    <>
+      <Grid item xs={12}>
+        <Controller
+          name='area'
+          control={control}
+          render={({ field }) => (
+            <Autocomplete
+              {...field}
+              freeSolo
+              options={
+                areas
+                  ? areas.map(
+                      (area: AutocompleteData) =>
+                        `${area.mainText} - ${area.secondaryText ?? 'N/A'}`
+                    )
+                  : []
+              }
+              onInputChange={(_, value) => setSearch(value)}
+              onChange={(_, data) => setValue('area', data ?? '')}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label='Area'
+                  variant='filled'
+                  placeholder="Type in the property's area"
+                  error={!!errors['area']?.message}
+                  helperText={errors['area']?.message}
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <>
+                        {isValidating ? (
+                          <CircularProgress color='inherit' size={20} />
+                        ) : null}
+                        {params.InputProps.endAdornment}
+                      </>
+                    ),
+                  }}
+                />
+              )}
+            />
+          )}
+        />
+      </Grid>
+      <Notifications error={error} />
+    </>
   );
 };
 

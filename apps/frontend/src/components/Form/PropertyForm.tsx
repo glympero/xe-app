@@ -9,6 +9,8 @@ import usePropertiesServices from '../../hooks/usePropertiesServices';
 import { Property, PropertyData, RouterPaths } from '../../interfaces';
 import { propertySchema } from '../../schemas/property';
 import { prepareInitialValueData } from '../../utils';
+import { ApiError } from '../../hooks/useFetch';
+import Notifications from '../Layout/Notifications';
 
 type Props = {
   property?: Property;
@@ -16,12 +18,16 @@ type Props = {
 
 const PropertyForm: React.FC<Props> = ({ property }) => {
   const navigate = useNavigate();
+  const [error, setError] = React.useState<ApiError | undefined>(undefined);
   const { handleAsyncSubmit, handleAsyncEdit, isValidating } =
     usePropertiesServices();
   const defaultValues = useMemo(
     () => prepareInitialValueData(property),
     [property]
   );
+
+  const isEditMode = useMemo(() => !!property, [property]);
+
   const formMethods = useForm<PropertyData>({
     resolver: zodResolver(propertySchema),
     defaultValues,
@@ -33,36 +39,47 @@ const PropertyForm: React.FC<Props> = ({ property }) => {
   };
 
   const handleFormSubmit = async (dataValues: PropertyData) => {
-    const values = await handleAsyncSubmit(dataValues);
-    if (values) {
+    const response = await handleAsyncSubmit(dataValues);
+    if (response.res) {
       navigate(RouterPaths.HOME);
+    } else {
+      setError(response.error);
     }
   };
 
   const handleFormEdit = async (dataValues: PropertyData) => {
     if (property) {
-      const values = await handleAsyncEdit(dataValues, property.id);
-      if (values) {
+      const response = await handleAsyncEdit(dataValues, property.id);
+      if (response.res) {
         navigate(RouterPaths.HOME);
+      } else {
+        setError(response.error);
       }
     }
   };
 
   return (
-    <FormProvider {...formMethods}>
-      <form
-        noValidate
-        onSubmit={formMethods.handleSubmit(
-          property ? handleFormEdit : handleFormSubmit
-        )}
-        style={{ width: '100%' }}
-      >
-        <Grid spacing={2} container mt={2} item xs={12} md={6}>
-          <PropertyInformation />
-          <SubmitForm reset={handleResetForm} isValidating={isValidating} />
-        </Grid>
-      </form>
-    </FormProvider>
+    <>
+      <FormProvider {...formMethods}>
+        <form
+          noValidate
+          onSubmit={formMethods.handleSubmit(
+            isEditMode ? handleFormEdit : handleFormSubmit
+          )}
+          style={{ width: '100%' }}
+        >
+          <Grid spacing={2} container mt={2} item xs={12} md={6}>
+            <PropertyInformation />
+            <SubmitForm
+              reset={handleResetForm}
+              isValidating={isValidating}
+              isEditMode={isEditMode}
+            />
+          </Grid>
+        </form>
+      </FormProvider>
+      <Notifications error={error} />
+    </>
   );
 };
 

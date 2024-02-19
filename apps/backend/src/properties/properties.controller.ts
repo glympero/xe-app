@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
@@ -26,7 +27,11 @@ export class PropertiesController {
 
   @Post()
   create(@Body() createPropertyDto: CreatePropertyDto) {
-    return this.propertiesService.create(createPropertyDto);
+    const property = this.propertiesService.create(createPropertyDto);
+    if (property) {
+      return property;
+    }
+    throw new ServiceUnavailableException('Service Unavailable');
   }
 
   @Patch(':id')
@@ -34,7 +39,11 @@ export class PropertiesController {
     @Param('id') id: string,
     @Body() updatePropertyDto: UpdatePropertyDto,
   ) {
-    return this.propertiesService.update(id, updatePropertyDto);
+    const property = this.propertiesService.update(id, updatePropertyDto);
+    if (property) {
+      return property;
+    }
+    throw new ServiceUnavailableException('Service Unavailable');
   }
 
   @Delete(':id')

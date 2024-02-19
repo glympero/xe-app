@@ -7,8 +7,9 @@ import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 import { mutate } from 'swr';
 import { useNavigate } from 'react-router-dom';
-import { PROPERTIES_URL } from '../../../constants';
-import { Property, RouterPaths } from '../../../interfaces';
+import { PROPERTIES_URL } from '../../constants';
+import { Property, RouterPaths } from '../../interfaces';
+import Box from '@mui/material/Box';
 
 type Props = {
   property: Property;
@@ -31,14 +32,19 @@ const PropertyDetails: React.FC<Props> = ({ property }) => {
           alt={property.title}
         />
         <CardContent>
-          <Typography gutterBottom variant='h5' component='div'>
-            {property.title}
+          <Box display='flex' justifyContent='space-between'>
+            <Typography gutterBottom variant='h5' component='div'>
+              {property.title}
+            </Typography>
+            <Typography variant='h4' color='text.secondary'>
+              {property.price} €
+            </Typography>
+          </Box>
+          <Typography variant='body1' color='text.secondary'>
+            {property.area}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
             {property.description}
-          </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            {property.price} €
           </Typography>
         </CardContent>
         <CardActions>

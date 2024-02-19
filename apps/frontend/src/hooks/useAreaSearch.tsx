@@ -12,5 +12,6 @@ export const useUserSearch = (query: string) => {
     areas: data,
     isValidating,
     isError: error !== undefined,
+    error,
   };
 };

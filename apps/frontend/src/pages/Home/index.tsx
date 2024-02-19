@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid';
-import NoProperties from './components/NoProperties';
-import PropertyDetails from './components/PropertyDetails';
+import NoProperties from '../../components/Property/NoProperties';
+import PropertyDetails from '../../components/Property/PropertyDetails';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import { PROPERTIES_URL } from '../../constants';
