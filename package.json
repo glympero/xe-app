@@ -2,13 +2,13 @@
   "name": "xe-app",
   "version": "1.0.0",
   "description": "",
+  "author": "Georgios Lymperopoulos - glympe77@gmail.com",
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"cd apps/frontend && npm run dev\" \"cd apps/backend && npm run dev\"",
     "test": "concurrently \"cd apps/frontend && npm run test\" \"cd apps/backend && npm run test\""
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "workspaces": [
     "apps/*"

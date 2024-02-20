@@ -11,7 +11,7 @@ Ensure you have the following installed on your system:
 
 ### Docker Setup
 
-Docker is used to containerize the application, ensuring consistency across different development and production environments. To get started with Docker:
+Docker is used to containerize the application's db, ensuring consistency across different development and production environments. To get started with Docker:
 
 1. **Start the Docker application** on your machine. Ensure it's running before proceeding with the next steps.
 
